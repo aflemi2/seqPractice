@@ -26,8 +26,12 @@ const Residence = conn.define('residence', {
 });
 
 City.beforeUpdate((cityInstance) => {
+  let mayor;
   Promise.resolve(User.findById(cityInstance.mayorId))
-  .then( mayor => mayor.getHomes())
+  .then( _mayor => {
+    mayor = _mayor;
+    return _mayor.getHomes();
+  })
   .then(homes => {
       if(homes.length === 0){
         return console.log(chalk.red('Mayor must live somewhere!'));
@@ -35,15 +39,11 @@ City.beforeUpdate((cityInstance) => {
       else
       {
         const match = homes.find(home => cityInstance.id === home.cityId);
-        return match ? console.log(chalk.green('Mayor accepted'))
+        return match ? console.log(chalk.green(`${mayor.name} accepted as Mayor!`))
         :
         console.log(chalk.red(`The mayor must live in ${cityInstance.name}`));
       }
   });
-
-  // const residences = mayorToBe.getHomes();
-  // const match = residences.find((home)=> cityInstance.id === home.cityId);
-  //  if(!match){console.log(`The mayor must live in ${cityInstance.name}`);}
 });
 
 const usernames = ['moe', 'larry', 'curly'];
