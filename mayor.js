@@ -34,7 +34,7 @@ City.beforeUpdate((cityInstance) => {
   })
   .then(homes => {
       if(homes.length === 0){
-        return console.log(chalk.red('Mayor must live somewhere!'));
+        throw console.log(chalk.red('Mayor must live somewhere!'));
       }
       else
       {
