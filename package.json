@@ -2,10 +2,10 @@
   "name": "practice",
   "version": "1.0.0",
   "description": "",
-  "main": "mayor.js",
+  "main": "buildings.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node mayor.js"
+    "start": "node buildings.js"
   },
   "author": "",
   "license": "ISC",
